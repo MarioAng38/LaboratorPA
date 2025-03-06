@@ -1,0 +1,37 @@
+//produse care folosesc C:
+
+Unix  
+Linux Kernel  
+Windows Kernel  
+MacOS și iOS Kernel (XNU)  
+GCC  
+Git  
+MySQL  
+Mozilla Firefox 
+Google Chrome
+Opera
+DOOM  
+Unreal Engine 
+Arduino
+Raspberry Pi Firmware  
+Sisteme ECU, ABS, infotainment pentru automobile
+
+
+//rutina de seara
+
+
+daca ora >= 2100 
+atunci
+	dus -> 1
+	spalat pe dinti -> 1
+	daca barbierit = 0 
+		atunci barbierit -> 1
+	daca ghiozdan = "nefacut"
+		pentru i->1,5
+			materii(i)++
+		ghiozdan = "facut"
+	daca lampa = 1
+		lampa ->0
+afiseaza "Noapte Buna Tuturor"
+		
+	
