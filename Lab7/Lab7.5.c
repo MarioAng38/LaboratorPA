@@ -14,60 +14,91 @@ void insert(int data) {
     struct node *current;
     struct node *parent;
 
-    tempNode -> data = data;
-    tempNode -> leftChild = NULL;
-    tempNode -> rightChild = NULL;
+    tempNode->data = data;
+    tempNode->leftChild = NULL;
+    tempNode->rightChild = NULL;
 
     if(root == NULL) {
         root = tempNode;
-    }
-    else {
+    } else {
         current = root;
-        parent = NULL;  
-    
-    while(1) {
-        parent = current;
-        if(data < parent -> data) {
-            current = current -> leftChild;
-            if(current == NULL) {
-                parent -> leftChild = tempNode;
-                return;
-            }
-        }
-        else {
-            current = current->rightChild;
-            if(current == NULL) {
-                parent -> rightChild = tempNode;
-                return;
+        parent = NULL;
+
+        while(1) {
+            parent = current;
+            if(data < parent->data) {
+                current = current->leftChild;
+                if(current == NULL) {
+                    parent->leftChild = tempNode;
+                    return;
+                }
+            } else {
+                current = current->rightChild;
+                if(current == NULL) {
+                    parent->rightChild = tempNode;
+                    return;
+                }
             }
         }
     }
-}
 }
 
-int adancimeArbore(struct node *nod,int nivel,int *adancimi) {
+void adancimiArbore(struct node *nod, int nivel, int *adancimi) {
     if(nod == NULL) {
-        return 0;
+        return;
     }
     adancimi[nod->data] = nivel;
-    adancimeArbore(nod -> leftChild, nivel + 1, adancimi);
-    adancimeArbore(nod -> rightChild,nivel + 1, adancimi);
+    adancimiArbore(nod->leftChild, nivel + 1, adancimi);
+    adancimiArbore(nod->rightChild, nivel + 1, adancimi);
+}
+
+struct node* cautareParinte(int data) {
+    struct node *current = root;
+    struct node *parent = NULL;
+
+    while(current != NULL) {
+        if(current->data == data) {
+            return parent;
+        }
+        parent = current;
+        if(data < current->data) {
+            current = current->leftChild;
+        } else {
+            current = current->rightChild;
+        }
+    }
+    return NULL;
+}
+
+void suntVeri(int *valori, int n) {
+    int adancimi[1000] = {0};
+    adancimiArbore(root, 1, adancimi);
+
+    printf("Perechile de veri sunt:\n");
+    for(int i = 0; i < n; i++) {
+        for(int j = i + 1; j < n; j++) {
+            int a = valori[i];
+            int b = valori[j];
+            if(adancimi[a] == adancimi[b]) {
+                struct node *p1 = cautareParinte(a);
+                struct node *p2 = cautareParinte(b);
+                if(p1 != NULL && p2 != NULL && p1 != p2) {
+                    printf("(%d,%d) ", a, b);
+                }
+            }
+        }
+    }
+    printf("\n");
 }
 
 int main() {
-    int array[7] = {27, 14, 35, 10, 19, 31, 42};
-    int adancimi[1000] = {0};
-    for(int i = 0; i < 7; i++) {
+    int array[11] = {50, 30, 70, 20, 40, 60, 80, 15, 25, 35, 45};
+    int n = 11;
+    for(int i = 0; i < n; i++) {
         insert(array[i]);
     }
-    adancimeArbore(root,1,adancimi);
-    for(int i = 0; i < 1000; i++) {
-        if(adancimi[i] != 0) {
-            printf("Nodul %d are adancimea %d\n", i , adancimi[i]);
-        }
-    }
-    
-    
+
+    suntVeri(array, n);
 
     return 0;
 }

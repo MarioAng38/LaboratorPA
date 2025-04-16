@@ -74,8 +74,8 @@ void postOrderTraversal(struct node *nod) {
 }
 
 int main() {
-    int array[7] = {27, 14, 35, 10, 19, 31, 42};
-    for(int i = 0; i < 7; i++) {
+    int array[11] = {50, 30, 70, 20, 40, 60, 80, 15, 25, 35, 45};
+    for(int i = 0; i < 11; i++) {
         insert(array[i]);
     }
     printf("In Order Traversal:");
