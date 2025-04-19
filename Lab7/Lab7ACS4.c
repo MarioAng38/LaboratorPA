@@ -9,6 +9,8 @@ typedef struct node {
 }Node;
 
 Node *root;
+char valoriArbore[100][10];
+int idx = 0;
 
 Node* inserareEchilibrata(int array[], int start, int end) {
     if (start > end) {
@@ -24,40 +26,17 @@ Node* inserareEchilibrata(int array[], int start, int end) {
     return nod;
 }
 
-void visit(struct node *nod) {
+void visitAndSaveStr(struct node *nod) {
     printf("%d ",nod->data);
+    sprintf(valoriArbore[idx++], "%d", nod->data); //salvez ca string
 }
 
 void inOrderTraversal(struct node *nod) {
     if(nod != NULL) {
         inOrderTraversal(nod->leftChild);
-        visit(nod);
+        visitAndSaveStr(nod);
         inOrderTraversal(nod->rightChild);
     }
-}
-
-bool esteEchilibrat(Node *nod, int *adancime) {
-    if (nod == NULL) {
-        *adancime = 0;
-        return true;
-    }
-
-    int adancimeStanga = 0, adancimeDreapta = 0;
-
-    bool echilibratSt = esteEchilibrat(nod->leftChild, &adancimeStanga);
-    bool echilibratDr = esteEchilibrat(nod->rightChild, &adancimeDreapta);
-
-    *adancime = (adancimeStanga > adancimeDreapta ? adancimeStanga : adancimeDreapta) + 1;
-
-    if (!echilibratSt || !echilibratDr) {
-        return false;
-    }
-
-    if (abs(adancimeStanga - adancimeDreapta) > 1) {
-        return false;
-    }
-
-    return true;
 }
 
 int main() {
@@ -65,14 +44,18 @@ int main() {
     int n = 7;
 
     root = inserareEchilibrata(array, 0, n - 1);
+    printf("InOrder initial: ");
     inOrderTraversal(root);
-    int adancime = 0;
-    
-    if (esteEchilibrat(root, &adancime)) {
-        printf("\nArborele este echilibrat!\n");
-    } else {
-        printf("\nArborele nu este echilibrat!\n");
-    }
 
+    printf("\nElementele salvate in vectorul de stringuri:");
+    int newArray[100];
+    for(int i = 0; i < idx; i++) {
+        printf("%s ", valoriArbore[i]);
+        newArray[i] = atoi(valoriArbore[i]);
+
+    }
+    Node *newRoot = inserareEchilibrata(newArray, 0, idx-1);
+    printf("\nInOrder de stringuri: ");
+    inOrderTraversal(newRoot);
     return 0;
 }

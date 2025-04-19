@@ -1,0 +1,44 @@
+Arbore AVL (Adelson-Velsky and Landis):
+
+Este un arbore binar de cautare echilibrat. Dupa fiecare inserare sau stergere, arborele se reechilibreaza automat astfel incat diferenta de inaltime dintre subarborii stang si drept ai oricarui nod sa nu fie mai mare de 1.
+
+Caracteristici:
+
+Fiecare nod are un "factor de echilibru" = inaltime stanga - inaltime dreapta (maxim 1 in valoare absoluta).
+
+La modificari, se fac rotatii (simple sau duble) pentru a pastra echilibrul.
+
+Cautarea, inserarea si stergerea sunt in O(log n).
+
+Utilizare:
+
+Cand ai nevoie de operatii rapide si dese asupra datelor (ex: baze de date, compilatoare).
+
+Arbore B (B-tree):
+
+Este un arbore de cautare generalizat (nu binar), folosit pentru stocarea eficienta a datelor pe discuri sau in baze de date.
+
+Caracteristici:
+
+Fiecare nod poate avea mai multi fii (nu doar 2).
+
+Cheile din noduri sunt sortate si fiecare nod poate avea intre m/2 si m copii (unde m este ordinea arborelui).
+
+Se autoechilibreaza prin divizari si fuziuni de noduri la inserare/stergere.
+
+Timpul de acces este O(log n), dar cu mai putine niveluri decat un arbore binar.
+
+Utilizare:
+
+In sistemele de fisiere (ex: NTFS, ext4).
+
+In majoritatea bazelor de date (ex: MySQL, SQLite).
+
+Diferente principale intre AVL si B-tree:
+
+AVL este binar, B-tree are mai multi fii per nod.
+
+AVL este folosit in RAM, B-tree este folosit pentru stocare pe disc.
+
+AVL foloseste rotatii, B-tree foloseste divizari si fuziuni.
+
